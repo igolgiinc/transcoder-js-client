@@ -1,7 +1,5 @@
 db.sqlite*
 .parcel-cache
-dist
-build
 node_modules
 pnpm-lock.yaml
 
