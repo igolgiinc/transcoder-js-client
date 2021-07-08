@@ -1,4 +1,4 @@
-import {API, SystemInfoResponse} from '../api'
+import {TranscoderNodeAPI, SystemInfoResponse} from '../api'
 import {TypedAxiosInstance} from 'restyped-axios'
 import {Either, left, right} from 'fp-ts/lib/Either'
 
@@ -6,7 +6,7 @@ import {Either, left, right} from 'fp-ts/lib/Either'
 // Sample URL: http://10.1.10.193/json/stats.php?action=sample&t=1612553366690
 // Calls the `case "sample"` case in `web_admin/json/stats.php`.
 export default async function systemInfoGet(
-    axios: TypedAxiosInstance<API>,
+    axios: TypedAxiosInstance<TranscoderNodeAPI>,
     includeDiskStats: boolean = false): Promise<Either<string, SystemInfoResponse>> {
     try{
         const resp = await axios.request({

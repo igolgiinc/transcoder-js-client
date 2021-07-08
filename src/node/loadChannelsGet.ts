@@ -1,4 +1,4 @@
-import {API, LoadChannelsResponse} from '../api'
+import {TranscoderNodeAPI, LoadChannelsResponse} from '../api'
 import {TypedAxiosInstance} from 'restyped-axios'
 import {Either, left, right} from 'fp-ts/lib/Either'
 
@@ -6,7 +6,7 @@ import {Either, left, right} from 'fp-ts/lib/Either'
 // Sample URL: http://10.1.10.193/json/control.php?1612553366829=&fName=LoadChannels
 // Calls the `loadChannels` method in `web_admin/includes/db.class.php'.
 // On error, returns a string representation of the exception thrown.
-export default async function loadChannelsGet(axios: TypedAxiosInstance<API>): Promise<Either<string, LoadChannelsResponse|string>> {
+export default async function loadChannelsGet(axios: TypedAxiosInstance<TranscoderNodeAPI>): Promise<Either<string, LoadChannelsResponse | string>> {
     try{
         const resp = await axios.request({
             url: '/json/control.php',

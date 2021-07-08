@@ -1,12 +1,13 @@
 import {ConfigFile} from '../api'
+import {compactMap} from '../utils'
 
 export interface ConfigFileStatus {
-    readonly channels: {[name: string]: {name: string, config: string, running: boolean, statusOpen: boolean, lastStartedTs: number}|undefined},
-    readonly configs: {[fileName: string]: ConfigFile|undefined}
-    configFileForChannelWithId: (id: number) => ConfigFile|undefined
+    readonly channels: {[name: string]: {name: string, config: string, running: boolean, statusOpen: boolean, lastStartedTs: number} | undefined},
+    readonly configs: {[fileName: string]: ConfigFile | undefined}
+    configFileForChannelWithId: (id: number) => ConfigFile | undefined
 }
 
-export const ConfigFileStatus = (props: Pick<ConfigFileStatus, 'channels'|'configs'>): ConfigFileStatus => {
+export const ConfigFileStatus = (props: Pick<ConfigFileStatus, 'channels' | 'configs'>): ConfigFileStatus => {
     return {
         channels: props.channels,
         configs: props.configs,
@@ -20,10 +21,14 @@ export const ConfigFileStatus = (props: Pick<ConfigFileStatus, 'channels'|'confi
     }
 }
 const regex = /channel([\d]+)/i
-function channelNumber(channelName: string): number|undefined {
+function channelNumber(channelName: string): number | undefined {
     const x = regex.exec(channelName)
     return (x !== null && x.length >= 2) ? parseInt(x[1]) : undefined
 }
+
 export const getChannelNumbers = (cfs: ConfigFileStatus): number[] =>
-    Object.keys(cfs.channels)
-        .compactMap(channelNumber)
+    compactMap(Object.keys(cfs.channels),
+        channelNumber)
+
+
+

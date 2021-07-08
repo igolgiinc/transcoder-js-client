@@ -1,4 +1,5 @@
-import {API, LoadChannelsResponse, SystemInfoResponse} from './api'
+import * as api from './api'
+export * from './api'
 import axios, {TypedAxiosInstance} from 'restyped-axios'
 import stop, {StopAPIStatus} from './node/stop'
 import start, {StartAPIStatus} from './node/start'
@@ -12,11 +13,12 @@ import {Either} from 'fp-ts/Either'
 import {NetworkError} from './node/NetworkError'
 import FormData from 'form-data'
 
-export class Client {
-    public axios: TypedAxiosInstance<API>
+
+export class TranscoderNodeClient {
+    public axios: TypedAxiosInstance<api.TranscoderNodeAPI>
 
     constructor(public readonly node: {ip: string, auth: {username: string, password: string}}) {
-        this.axios = axios.create<API>({baseURL: `http://${node.ip}/`})
+        this.axios = axios.create<api.TranscoderNodeAPI>({baseURL: `http://${node.ip}/`})
         this.axios.interceptors.request.use(function (config) {
             config.auth = node.auth
             return config;
@@ -32,10 +34,10 @@ export class Client {
     start = async (channelId: number, configFilename: string): Promise<Either<NetworkError, StartAPIStatus>> =>
         start(this.axios, channelId, configFilename)
 
-    loadChannelsGet = async(): Promise<Either<string, LoadChannelsResponse | string>> =>
+    loadChannelsGet = async(): Promise<Either<string, api.LoadChannelsResponse | string>> =>
         loadChannelsGet(this.axios)
 
-    systemInfoGet = async(): Promise<Either<string, SystemInfoResponse>> =>
+    systemInfoGet = async(): Promise<Either<string, api.SystemInfoResponse>> =>
         systemInfoGet(this.axios)
 
     configFileStatusGet = async(): Promise<Either<NetworkError, ConfigFileStatus>> =>

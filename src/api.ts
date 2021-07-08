@@ -1,6 +1,6 @@
 import FormData from 'form-data'
 
-export interface API {
+export interface TranscoderNodeAPI {
     '/control.php': {
         GET: {
             query:
@@ -18,7 +18,7 @@ export interface API {
 }
 
 // Load Channels
-export interface API {
+export interface TranscoderNodeAPI {
     '/json/control.php': {
         GET: {
             query:
@@ -42,13 +42,13 @@ export interface LoadChannelsResponseChannelInfo {
 }
 
 // System Info
-export interface API {
+export interface TranscoderNodeAPI {
     '/json/stats.php': {
         GET: {
             query:
             {
                 action: 'sample'
-                include_diskstats?: 0|1
+                include_diskstats?: 0 | 1
             }
             response: SystemInfoResponse
         }
@@ -87,7 +87,7 @@ export interface SystemInfoResponse {
 }
 
 // Config file endpoint
-export interface API {
+export interface TranscoderNodeAPI {
     '/config-manager-api.php': {
         GET: {
             response: ConfigFileStatusResponse
@@ -108,12 +108,12 @@ export interface ConfigFileStatusResponse {
 }
 export type ConfigFile = {
     name: string,
-    contents: string|null,
-    last_modified_ts: string|null
+    contents: string | null,
+    last_modified_ts: string | null
 }
 
 // Slate Upload
-export interface API {
+export interface TranscoderNodeAPI {
     '/json/slate.php': {
         POST: {
             body: FormData

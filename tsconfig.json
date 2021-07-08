@@ -13,7 +13,7 @@
         "enable": false
     }, // Enforce exxplicit type depenencies.
     "compilerOptions": {
-        "outDir": "build", // Compiled code goes here.
+        "outDir": "dist", // Compiled code goes here.
         "plugins": [], // TypeScript language server plugins to load
         "lib": [
             "es2019",
@@ -37,7 +37,7 @@
         "skipDefaultLibCheck": true, // Don't check default .d.ts files, *but check package-owned ones*.
         "downlevelIteration": true,
         "experimentalDecorators": true,
-        "declaration": false,
+        "declaration": true,
         "removeComments": true,
         "noImplicitReturns": true,
         "noUnusedLocals": false, // Causes false negatives. See https://tinyurl.com/y36tuzce.
