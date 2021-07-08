@@ -1,0 +1,1 @@
+This code was extracted from the configuration manager in order to be reused across all code bases which need to interact with transcode nodes. In particular, its immediate intended aim was to be used by the platform code's transcoder app.
